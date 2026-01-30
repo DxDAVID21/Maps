@@ -117,13 +117,14 @@
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
-    const initialValue = 0;
-    const totalYears = inventors.reduce((accumulator, currentValue) => accumulator - currentValue, initialValue,);
+    const totalYears = inventors.reduce((total, inventor) => {
+      return total + (inventor.passed - inventor.year)
+    }, 0);
     
     console.log(totalYears);
 
     // 5. Sort the inventors by years lived
-    const oldest ='' 
+    const oldest = inventors.sort((a, b) => (a.passed - a.year) - (b.passed - b.year)) 
     console.table(oldest);
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
@@ -137,7 +138,7 @@
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
-    const alpha = ''
+    const alpha = inventors.sort((a, b) => a.last.localeCompare(b.last))
     console.log(alpha);
 
     
@@ -160,7 +161,10 @@
     // Some and Every Checks
     // Array.prototype.some() // is at least one person 19?
     
-    const isAdult = ''
+    const isAdult = people2.some(person => {
+      const currentYear = new Date().getFullYear();
+      return currentYear - person.year >= 19;
+    })
     console.log({isAdult});
 
 
